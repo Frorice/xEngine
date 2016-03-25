@@ -5,7 +5,7 @@
  (function (win){
  	//场景类
  	var _scene = win.Scene =function (arg){
- 		_scene.SID = 0;
+ 	
  		arg = arg || {};
  		//场景名称
  		this.name = arg.name || ("Unnamed_"+(++_scene.SID));
@@ -23,12 +23,12 @@
  		this.cvs = document.createElement("canvas");
  		this.cvs.setAttribute("id","cv_"+this.name);
  		this.cvs.setAttribute("style","z-index:-1;position:absolute;left:0px;top:0px");
- 		this.ctx = this.cvs[0].getContext("2d");
+ 		this.ctx = this.cvs.getContext("2d");
  		this.setPos();
  		this.setSize();
  		this.setColor(this.color);
- 		this.holder.append(this.cvs);
- 		document.body.append(this.holder);
+ 		this.holder.appendChild(this.cvs);
+ 		document.body.appendChild(this.holder);
 
  	};
 
@@ -44,8 +44,9 @@
  		setSize:function(w,h){
  			this.w = w || this.w;
  			this.h = h || this.h;
- 			this.holder.style.width = this.w;
- 			this.holder.style.height = this.h;
+
+ 			this.holder.style.width = this.w+"px";
+ 			this.holder.style.height = this.h+"px";
  			this.cvs.setAttribute("width",this.w);
  			this.cvs.setAttribute("height",this.h);
  		},
@@ -94,4 +95,6 @@
  			this.cvs = this.holder = this.ctx = null; 
  		}
  	};
+  //记录scene编号
+  _scene.SID = 0;
  }(window));

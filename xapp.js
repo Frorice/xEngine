@@ -8,10 +8,11 @@
  	var _game = win.Game = function(){
  		//保存所有的监听器
  		this.listeners = [];
+    this.paused = false;
  	};
  	//程序事件监听器
  	var _appEventListener = win.AppEventListener = function(param){
- 		EventListener.call(this);
+ 
  		//监听器是否生效
  		this.enabled = true;
  		this.onBeforeRender = param["beforeRender"]||this.onBeforeRender;
@@ -23,10 +24,6 @@
 
 
  	win.Game.prototype = {
- 		//初始化方法
- 		init:function(){
- 			this.paused = false;
- 		},
  		//添加监听器
  		addListener:function(ln){
  			this.listeners.push(ln);
@@ -60,6 +57,7 @@
  				//更新帧状态
  				FrameState.update();
  				if(!self.paused){
+
  					self.mainloop();
  				}
  			},spf);
