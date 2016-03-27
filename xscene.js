@@ -29,10 +29,27 @@
  		this.setColor(this.color);
  		this.holder.appendChild(this.cvs);
  		document.body.appendChild(this.holder);
-
+    //保存所有的监听器
+    this.listeners = [];
+    //记录所有的渲染对象
+    this.rObjs = [];
+    //命名的渲染对象，便于根据名称快速查找对象
+    this.namedRObjs = {};
  	};
 
  	win.Scene.prototype = {
+    createRObj:function(className,arg){
+      className = className || win.RenderObj;
+      var obj = new className();
+      this.addRObj(obj);
+      return obj;
+    },
+    //添加到rObjs中
+    addRObj:function(renderObj){
+      renderObj.owner = this;
+      this.rObjs.push(renderObj);
+      this.namedRObjs[renderObj.name] = renderObj;
+    },
  		//设置位置
  		setPos:function(x,y){
  			this.x = x || this.x;
