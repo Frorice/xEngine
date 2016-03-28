@@ -50,6 +50,24 @@
       this.rObjs.push(renderObj);
       this.namedRObjs[renderObj.name] = renderObj;
     },
+    //删除对象
+    removeRObj:function(renderObj){
+      this.removeRObjByName(renderObj.name);
+    },
+    //根据名称设置对象删除标记
+    removeRObjByName:function(name){
+      this.namedRObjs[name] && (this.namedRObjs[name].canRemove=true||true);
+    },
+    //移除所有置可移除标记的对象
+    removeAllCanRemove:function(){
+      for(var i=0;i<this.rObjs.length;i++){
+        var o = this.rObjs[i];
+        if(o.canRemove){
+          delete this.namedRObjs[o.name];
+          this.rObjs.splice(i,1);
+        }
+      }
+    },
  		//设置位置
  		setPos:function(x,y){
  			this.x = x || this.x;
