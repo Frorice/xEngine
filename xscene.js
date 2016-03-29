@@ -68,6 +68,53 @@
         }
       }
     },
+    //根据名称查找对象
+    getRObjByName:function (name){
+      return this.namedRObjs[name];
+    },
+    //清除所有渲染对象
+    clearRObj:function(){
+      this.rObjs = [];
+      this.namedRObjs = [];
+    },
+    //添加监听器
+    clearListeners:function (ln){
+      this.listeners.push(ln);
+    },
+    //清空监听器列表
+    clearListener:function(){
+      this.listeners.length = 0;
+    },
+    //更新场景
+    update:function(){
+      for(var i = 0;i<this.rObjs.length;i++){
+        this.rObjs[i].update();
+      }
+      this.removeAllCanRemove();
+    },
+    //执行渲染
+    render:function (){
+      var ltns = this.listeners;
+      //先清除场景，再渲染
+      this.clear();
+      //执行渲染前监听器
+      for(var i=0,len = ltns.length;i<len;i++){
+        ltns[i].enabled&&ltns[i].onBeforeRender(this);
+      }
+      this.renderRObj();
+      //执行渲染后监听器
+      for(i=0;i<len;i++){
+        ltns[i].enabled&&ltns[i].onAfterRender(this);
+      }
+    },
+    //渲染所有对象
+    renderRObj:function (){
+      for(var i = 0,len = this.rObjs.length;i<len,i++){
+        this.ctx.save();
+        this.rObjs[i].isVisible&&this.rObjs[i].render(this.ctx);
+        this.ctx.restore();
+      }
+    },
  		//设置位置
  		setPos:function(x,y){
  			this.x = x || this.x;

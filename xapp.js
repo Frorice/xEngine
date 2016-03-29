@@ -40,6 +40,12 @@
  			for(var i = 0;i<ltns.length;i++){
  				ltns[i].enabled&&ltns[i].onBeforeRender();
  			}
+      //获取当前场景，更新，并渲染
+      var scene = this.sceneManager.getCurrentScene();
+      if(scene){
+        scene.update();
+        scene.render();
+      }
  			//触发监听器渲染后事件
  			for(var i = 0;i<ltns.length;i++){
  				ltns[i].enabled&&ltns[i].onAfterRender();
