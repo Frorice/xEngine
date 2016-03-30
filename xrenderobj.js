@@ -5,7 +5,7 @@
  */
  (function (win){
   //渲染对象类
-  var renderObj = win.RenderObj = function(name){
+  var _renderObj = win.RenderObj = function(name){
     this.name = name || ("Unnamed_"+(_renderObj.SID++));
     //拥有者，指向场景对象
     this.owner = null;

@@ -78,7 +78,7 @@
       this.namedRObjs = [];
     },
     //添加监听器
-    clearListeners:function (ln){
+    addListener:function (ln){
       this.listeners.push(ln);
     },
     //清空监听器列表
@@ -97,21 +97,15 @@
       var ltns = this.listeners;
       //先清除场景，再渲染
       this.clear();
-      //执行渲染前监听器
-      for(var i=0,len = ltns.length;i<len;i++){
-        ltns[i].enabled&&ltns[i].onBeforeRender(this);
-      }
+      
       this.renderRObj();
-      //执行渲染后监听器
-      for(i=0;i<len;i++){
-        ltns[i].enabled&&ltns[i].onAfterRender(this);
-      }
+      
     },
     //渲染所有对象
     renderRObj:function (){
-      for(var i = 0,len = this.rObjs.length;i<len,i++){
+      for(var i = 0,len = this.rObjs.length;i<len;i++){
         this.ctx.save();
-        this.rObjs[i].isVisible&&this.rObjs[i].render(this.ctx);
+        this.rObjs[i].prototype.isVisible&&this.rObjs[i].render(this.ctx);
         this.ctx.restore();
       }
     },
@@ -136,14 +130,6 @@
  		setColor:function (color) {
  			this.color = color || "black";
  			this.holder.style.backgroundColor = this.color;
- 		},
- 		//更新场景
- 		update:function(){
- 			//更新所有精灵
- 		},
- 		//执行渲染
- 		render:function(){
- 			//渲染所有精灵
  		},
  		//清除背景
  		clear:function(){
