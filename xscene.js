@@ -5,7 +5,7 @@
  (function (win){
  	//场景类
  	var _scene = win.Scene =function (arg){
- 	
+ 	  
  		arg = arg || {};
  		//场景名称
  		this.name = arg.name || ("Unnamed_"+(++_scene.SID));

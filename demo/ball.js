@@ -3,9 +3,8 @@
   window.Ball = function(name,r){
     //定义半径
     this.r = r||10;
-    this.color = "white";
+    this.color = "#fff";
     this.prototype = new RenderObj(name);
-
   
   //重写update
   this.update = function(){
@@ -33,7 +32,7 @@
       ctx.lineWidth = 2;
       //描边
       ctx.beginPath();
-      ctx.strokeStyle = "#ffffff";
+      ctx.strokeStyle = "#000000";
       ctx.arc(this.prototype.x,this.prototype.y,this.r,0,Math.PI*2);
       ctx.stroke();
       
